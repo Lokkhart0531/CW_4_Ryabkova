@@ -14,6 +14,9 @@ class JSONConnector(FileConnector):
 
 
     def get_vacancies(self) -> list[Vacancy]:
+         """
+         Получение вакансии
+         """
         if not self.file_path.exists():
             return []
 
@@ -26,18 +29,27 @@ class JSONConnector(FileConnector):
         return vacancies
 
     def add_vacancy(self, vacancy: Vacancy) -> None:
+        """
+        Добавление вакансии
+        """
         vacancies = self.get_vacancies()
         if vacancy not in vacancies:
             vacancies.append(vacancy)
         self._save(*vacancies)
 
     def delete_vacancy(self, vacancy: Vacancy) -> None:
+        """
+        Удаление вакансии
+        """
         vacancies = self.get_vacancies()
         if vacancy in vacancies:
             vacancies.remove(vacancy)
         self._save(*vacancies)
 
     def _save(self, *vacancies: Vacancy) -> None:
+        """
+        Сохранение вакансии
+        """
         data = [self._parse_vacancy_to_dict(vac) for vac in vacancies]
         with self.file_path.open( mode="w", encoding=self.encoding) as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -45,6 +57,9 @@ class JSONConnector(FileConnector):
 
     @staticmethod
     def _parse_vacancy_to_dict(vacancy: Vacancy) -> dict:
+        """
+        Парсинг данных: вакансия -> словарь
+        """        
         return {
             'name':vacancy.name,
             'url': vacancy.url,
@@ -58,6 +73,9 @@ class JSONConnector(FileConnector):
 
     @staticmethod
     def _parse_dict_to_vacancy(data: dict) -> Vacancy:
+        """
+        Данные: словарь -> вакансия
+        """    
         return Vacancy(
             name=data['name'],
             url=data['url'],
