@@ -21,7 +21,7 @@ class HeadHunterAPI(VacancyAPIClient):
 
     def _parse_vacancy_data(self, data: dict) -> Vacancy:
         """
-        Полученние м обратка данных по вакансиям
+        Полученние и обратка данных по вакансиям
         """
         return Vacancy(
             name=data['name'],
