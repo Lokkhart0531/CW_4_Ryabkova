@@ -3,7 +3,7 @@ from src.dto import Vacancy
 
 class FileConnector(ABC):
     """
-    Работа с файлом: получение, запись, удаление
+    Работа с файлом: получение, запись, удаление c использованием абстрактоного метода
     """
     @abstractmethod
     def get_vacancies(self) -> list[Vacancy]:
