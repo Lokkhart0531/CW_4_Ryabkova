@@ -13,7 +13,7 @@ class Salary:
 
     def __lt__(self, other):
         """
-        Сравнение зарплат
+        Сравнение зарплат с использованием магического метода __lt__
         """
         self_salary_from = self.salary_from or 0
         self_salary_to = self.salary_to or 0
